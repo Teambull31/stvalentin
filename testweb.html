@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Mélanie ❤️ Mathéo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    :root {
+      --rose-pale: #ffe4ec;
+      --rose: #f48fb1;
+      --rouge: #c2185b;
+      --ivoire: #fff8f0;
+      --texte: #3a3a3a;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, var(--rose-pale), var(--ivoire));
+      color: var(--texte);
+    }
+
+    header {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before,
+    header::after {
+      content: "❤";
+      position: absolute;
+      font-size: 5rem;
+      color: rgba(244, 143, 177, 0.25);
+      animation: float 10s ease-in-out infinite alternate;
+    }
+
+    header::before {
+      top: 10%;
+      left: 5%;
+    }
+
+    header::after {
+      bottom: 5%;
+      right: 8%;
+      animation-delay: 3s;
+    }
+
+    @keyframes float {
+      from { transform: translateY(0); }
+      to   { transform: translateY(-30px); }
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 0.35rem 0.9rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.75);
+      color: var(--rouge);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 1.5rem;
+    }
+
+    h1 {
+      font-size: clamp(2.3rem, 5vw, 3rem);
+      margin: 0 0 0.7rem;
+      color: var(--rouge);
+    }
+
+    h1 span {
+      white-space: nowrap;
+    }
+
+    .subtitle {
+      font-size: 1.05rem;
+      max-width: 28rem;
+      margin: 0 auto 2rem;
+      line-height: 1.6;
+    }
+
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.9rem 1.6rem;
+      border-radius: 999px;
+      border: none;
+      background: linear-gradient(135deg, var(--rouge), var(--rose));
+      color: white;
+      font-size: 0.95rem;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 14px 30px rgba(194, 24, 91, 0.35);
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 40px rgba(194, 24, 91, 0.45);
+    }
+
+    .cta span.heart {
+      animation: heartbeat 1.2s ease-in-out infinite;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      25%      { transform: scale(1.15); }
+      50%      { transform: scale(0.96); }
+      75%      { transform: scale(1.08); }
+    }
+
+    main {
+      max-width: 960px;
+      margin: 0 auto 3rem;
+      padding: 0 1.5rem 3rem;
+    }
+
+    section {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 22px;
+      padding: 1.8rem 1.6rem;
+      margin-top: 1.8rem;
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(12px);
+    }
+
+    section h2 {
+      margin-top: 0;
+      font-size: 1.3rem;
+      color: var(--rouge);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    section h2 span.icon {
+      font-size: 1.4rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 1.1rem;
+      margin-top: 1.1rem;
+    }
+
+    .card {
+      padding: 1rem 0.9rem;
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(244, 143, 177, 0.08), rgba(255, 255, 255, 0.95));
+    }
+
+    .card h3 {
+      margin: 0 0 0.35rem;
+      font-size: 1rem;
+      color: var(--rouge);
+    }
+
+    .card p {
+      margin: 0;
+      font-size: 0.92rem;
+      line-height: 1.6;
+    }
+
+    .quote {
+      font-style: italic;
+      font-size: 0.98rem;
+      line-height: 1.7;
+      border-left: 3px solid var(--rose);
+      padding-left: 1rem;
+      margin-top: 1rem;
+    }
+
+    .timeline {
+      position: relative;
+      padding-left: 1.2rem;
+      margin-top: 0.9rem;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      top: 0.2rem;
+      left: 0.35rem;
+      bottom: 0.2rem;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--rose), transparent);
+      border-radius: 999px;
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 0.85rem;
+      padding-left: 1.1rem;
+      font-size: 0.94rem;
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--rouge);
+      left: -0.1rem;
+      top: 0.35rem;
+      box-shadow: 0 0 0 4px rgba(244, 143, 177, 0.25);
+    }
+
+    .timeline-item span.date {
+      font-weight: 600;
+      color: var(--rouge);
+      margin-right: 0.4rem;
+    }
+
+    .footer-note {
+      text-align: center;
+      font-size: 0.85rem;
+      color: rgba(0, 0, 0, 0.55);
+      margin-top: 1.8rem;
+    }
+
+    .footer-note strong {
+      color: var(--rouge);
+    }
+
+    @media (min-width: 720px) {
+      header {
+        padding-top: 3rem;
+      }
+
+      .hero-layout {
+        display: grid;
+        grid-template-columns: 1.3fr 1fr;
+        gap: 3rem;
+        align-items: center;
+        max-width: 960px;
+        margin: 0 auto;
+      }
+
+      .hero-card {
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 24px;
+        padding: 1.6rem 1.4rem;
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(16px);
+      }
+
+      .hero-card h3 {
+        margin-top: 0;
+        font-size: 1.05rem;
+        color: var(--rouge);
+      }
+
+      .hero-card p {
+        font-size: 0.92rem;
+        line-height: 1.6;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header id="top">
+  <div class="hero-layout">
+    <div>
+      <div class="tag">Pour Mélanie • Saint-Valentin 2026</div>
+      <h1>
+        <span>Mélanie</span> ❤️ <span>Mathéo</span>
+      </h1>
+      <p class="subtitle">
+        Ce petit site est mon moyen à moi, de développeur qui passe beaucoup trop de temps 
+        derrière son écran, pour te dire quelque chose de très simple&nbsp;: je t’aime, aujourd’hui encore plus qu’hier.
+      </p>
+      <a href="#histoire" class="cta">
+        <span class="heart">❤</span>
+        <span>Découvrir notre petite histoire</span>
+      </a>
+    </div>
+
+    <aside class="hero-card">
+      <h3>Pourquoi ce site&nbsp;?</h3>
+      <p>
+        On partage le même toit à Toulouse, les mêmes journées qui commencent tôt, et les soirées où je reste un peu trop longtemps à bidouiller des serveurs. 
+        Ce soir, tout ça est pour toi, pour nous, et pour tout ce que l’on construit ensemble.
+      </p>
+    </aside>
+  </div>
+</header>
+
+<main>
+  <section id="histoire">
+    <h2><span class="icon">📖</span> Notre histoire en quelques lignes</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <span class="date">Avant toi</span>
+        Je passais déjà mes journées dans le monde du code et des serveurs, mais il manquait la meilleure partie&nbsp;: quelqu’un avec qui vraiment partager la vie.
+      </div>
+      <div class="timeline-item">
+        <span class="date">Toi</span>
+        Tu es arrivée comme une évidence, petit à petit tu as pris toute la place, et notre appartement est devenu un vrai chez-nous.
+      </div>
+      <div class="timeline-item">
+        <span class="date">Aujourd’hui</span>
+        On se réveille tôt, on court après le temps entre le travail, la salle de sport et le reste, mais au milieu de tout ça il y a toujours ce moment où je me dis que j’ai une chance immense de t’avoir.
+      </div>
+      <div class="timeline-item">
+        <span class="date">Demain</span>
+        Ce n’est pas un grand discours, juste une promesse simple&nbsp;: continuer à faire de mon mieux pour te rendre fière, te faire rire, et t’aimer fort, même dans les petits gestes du quotidien.
+      </div>
+    </div>
+    <p class="quote">
+      «&nbsp;Ce site, c’est un bout de moi, écrit en lignes de code, pour la personne qui rend toutes mes journées plus douces, même celles qui commencent à 6&nbsp;h du matin.&nbsp;»
+    </p>
+  </section>
+
+  <section id="toi">
+    <h2><span class="icon">🌹</span> Ce que j’aime chez toi</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Ta présence</h3>
+        <p>
+          Le simple fait de savoir que tu m’attends à la maison transforme une journée chargée en quelque chose de plus léger. 
+          Tu fais de notre appartement un endroit où j’ai envie de rentrer vite.
+        </p>
+      </div>
+      <div class="card">
+        <h3>Ton soutien</h3>
+        <p>
+          Tu acceptes mes soirées à faire du DevOps, mes projets un peu fous et mes idées de geek, 
+          tout en me ramenant toujours à l’essentiel&nbsp;: nous deux.
+        </p>
+      </div>
+      <div class="card">
+        <h3>Ton quotidien avec moi</h3>
+        <p>
+          J’aime nos routines, nos plats improvisés, nos fous rires pour rien, nos séries regardées trop tard, 
+          et toutes ces choses simples qui rendent notre vie ensemble unique.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="nous">
+    <h2><span class="icon">💌</span> Un mot pour toi</h2>
+    <p class="quote">
+      Mélanie,<br><br>
+      On ne vit pas une histoire parfaite de film, mais on vit quelque chose de bien plus vrai&nbsp;: notre histoire, avec nos tasses de café, 
+      nos journées bien remplies, les bugfix de dernière minute et les câlins qui effacent tout.<br><br>
+      Merci de partager ma vie, mes hauts, mes bas, et ce fichu ordinateur qui prend parfois trop de place. 
+      Je te promets de toujours trouver du temps pour toi, pour nous, et pour continuer à écrire notre histoire, 
+      ligne par ligne, jour après jour.<br><br>
+      Je t’aime.<br>
+      Mathéo ❤️
+    </p>
+  </section>
+
+  <section id="souvenir">
+    <h2><span class="icon">🎁</span> Un petit souvenir</h2>
+    <p>
+      Tu pourras garder ce site comme une carte de Saint-Valentin différente, 
+      un peu à notre image&nbsp;: simple, sincère et remplie de petits détails pensés pour toi. 
+      Et si un jour notre vie change d’adresse ou de ville, je mettrai cette page à jour, comme on met à jour un projet important.
+    </p>
+    <div class="footer-note">
+      Fait avec beaucoup d’amour, un peu de code, et toi en tête du début à la fin. <strong>Bonne Saint-Valentin, Mélanie.</strong>
+    </div>
+  </section>
+</main>
+
+</body>
+</html>
