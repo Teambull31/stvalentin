@@ -24,180 +24,8 @@
       color: var(--texte);
     }
 
-    /* GALERIE CARROUSEL */
-    .gallery-container {
-      position: relative;
-      width: 100%;
-      height: 100vh;
-      overflow: hidden;
-      background: #000;
-    }
-
-    .gallery-wrapper {
-      position: relative;
-      width: 100%;
-      height: 100%;
-    }
-
-    .gallery-slide {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      opacity: 0;
-      transition: opacity 1s ease-in-out;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .gallery-slide.active {
-      opacity: 1;
-    }
-
-    .gallery-slide img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .gallery-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, rgba(194, 24, 91, 0.4), rgba(244, 143, 177, 0.3));
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      color: white;
-      backdrop-filter: blur(2px);
-      padding: 2rem;
-    }
-
-    .gallery-overlay h2 {
-      font-size: clamp(1.8rem, 5vw, 3.5rem);
-      margin: 0 0 1rem;
-      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
-      font-weight: 700;
-      letter-spacing: 1px;
-      animation: slideInDown 0.8s ease-out;
-    }
-
-    .gallery-overlay p {
-      font-size: clamp(0.9rem, 2vw, 1.2rem);
-      max-width: 500px;
-      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
-      line-height: 1.8;
-      animation: slideInUp 0.8s ease-out 0.2s both;
-    }
-
-    @keyframes slideInDown {
-      from {
-        transform: translateY(-40px);
-        opacity: 0;
-      }
-      to {
-        transform: translateY(0);
-        opacity: 1;
-      }
-    }
-
-    @keyframes slideInUp {
-      from {
-        transform: translateY(40px);
-        opacity: 0;
-      }
-      to {
-        transform: translateY(0);
-        opacity: 1;
-      }
-    }
-
-    .gallery-nav {
-      position: absolute;
-      bottom: 30px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 12px;
-      z-index: 10;
-    }
-
-    .gallery-dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.5);
-      cursor: pointer;
-      transition: all 0.3s ease;
-      border: 2px solid rgba(255, 255, 255, 0.8);
-    }
-
-    .gallery-dot.active {
-      background: var(--rose);
-      transform: scale(1.2);
-      width: 14px;
-      height: 14px;
-    }
-
-    .gallery-arrow {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(255, 255, 255, 0.3);
-      color: white;
-      border: none;
-      font-size: 2rem;
-      padding: 1rem 1.5rem;
-      cursor: pointer;
-      z-index: 10;
-      border-radius: 50px;
-      transition: all 0.3s ease;
-      backdrop-filter: blur(10px);
-    }
-
-    .gallery-arrow:hover {
-      background: rgba(255, 255, 255, 0.6);
-      transform: translateY(-50%) scale(1.1);
-    }
-
-    .gallery-arrow.prev {
-      left: 20px;
-    }
-
-    .gallery-arrow.next {
-      right: 20px;
-    }
-
-    .scroll-down {
-      position: absolute;
-      bottom: 10px;
-      left: 50%;
-      transform: translateX(-50%);
-      color: white;
-      font-size: 2rem;
-      animation: bounce 2s infinite;
-      z-index: 5;
-    }
-
-    @keyframes bounce {
-      0%, 20%, 50%, 80%, 100% {
-        transform: translateX(-50%) translateY(0);
-      }
-      40% {
-        transform: translateX(-50%) translateY(-10px);
-      }
-      60% {
-        transform: translateX(-50%) translateY(-5px);
-      }
-    }
-
-    /* HEADER SECONDAIRE */
     header {
-      min-height: auto;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -206,7 +34,6 @@
       padding: 2rem 1.5rem;
       position: relative;
       overflow: hidden;
-      background: linear-gradient(135deg, var(--rose-pale) 0%, var(--ivoire) 100%);
     }
 
     header::before,
@@ -444,28 +271,10 @@
         font-size: 0.92rem;
         line-height: 1.6;
       }
+    }
   </style>
 </head>
 <body>
-
-<!-- GALERIE PHOTO CARROUSEL FULL-SCREEN -->
-<div class="gallery-container">
-  <div class="gallery-wrapper" id="gallery-wrapper">
-    <!-- Les images s'ajoutent dynamiquement ici -->
-  </div>
-  
-  <div class="gallery-overlay">
-    <h2 id="gallery-title">💕 Nos plus beaux moments 💕</h2>
-    <p id="gallery-subtitle">Découvre les souvenirs qui nous rendent fiers d'être ensemble</p>
-  </div>
-
-  <button class="gallery-arrow prev" onclick="prevSlide()">❮</button>
-  <button class="gallery-arrow next" onclick="nextSlide()">❯</button>
-  
-  <div class="gallery-nav" id="gallery-nav"></div>
-  
-  <div class="scroll-down" onclick="scrollToContent()">⬇️</div>
-</div>
 
 <header id="top">
   <div class="hero-layout">
@@ -573,101 +382,6 @@
     </div>
   </section>
 </main>
-
-<script>
-  // Configuration du carrousel d'images
-  let currentSlide = 0;
-  const slides = [];
-  const galleryTexts = [
-    { title: "💕 Nos plus beaux moments 💕", subtitle: "Découvre les souvenirs qui nous rendent fiers d'être ensemble" },
-    { title: "🌹 Une balançoire pour deux", subtitle: "Rien que nous, un moment suspendu dans le temps" },
-    { title: "🌙 Les petites ruelles", subtitle: "Les lieux où j'ai envie de te donner ma main" },
-    { title: "🛏️ Nos petits matins", subtitle: "Les moments les plus précieux sont les plus simples" },
-    { title: "❤️ Toi et moi", subtitle: "C'est tout ce dont j'ai besoin pour être heureux" },
-    { title: "✨ À bientôt", subtitle: "Chaque moment avec toi est une nouvelle histoire" }
-  ];
-
-  // Initialiser les images
-  function initGallery() {
-    const imageNumbers = [];
-    for (let i = 1; i <= 6; i++) {
-      imageNumbers.push(`images/photo${i}.jpg`);
-    }
-
-    const wrapper = document.getElementById('gallery-wrapper');
-    const nav = document.getElementById('gallery-nav');
-
-    imageNumbers.forEach((img, index) => {
-      // Créer les slides
-      const slide = document.createElement('div');
-      slide.className = 'gallery-slide';
-      if (index === 0) slide.classList.add('active');
-      
-      const image = document.createElement('img');
-      image.src = img;
-      image.alt = `Photo ${index + 1}`;
-      slide.appendChild(image);
-      wrapper.appendChild(slide);
-      slides.push(slide);
-
-      // Créer les dots
-      const dot = document.createElement('div');
-      dot.className = 'gallery-dot';
-      if (index === 0) dot.classList.add('active');
-      dot.onclick = () => goToSlide(index);
-      nav.appendChild(dot);
-    });
-
-    // Auto-play du carrousel
-    setInterval(autoNextSlide, 5000);
-  }
-
-  function showSlide(n) {
-    if (n >= slides.length) currentSlide = 0;
-    if (n < 0) currentSlide = slides.length - 1;
-
-    // Mettre à jour les slides
-    slides.forEach(slide => slide.classList.remove('active'));
-    slides[currentSlide].classList.add('active');
-
-    // Mettre à jour les dots
-    const dots = document.querySelectorAll('.gallery-dot');
-    dots.forEach(dot => dot.classList.remove('active'));
-    dots[currentSlide].classList.add('active');
-
-    // Mettre à jour le texte
-    if (galleryTexts[currentSlide]) {
-      document.getElementById('gallery-title').textContent = galleryTexts[currentSlide].title;
-      document.getElementById('gallery-subtitle').textContent = galleryTexts[currentSlide].subtitle;
-    }
-  }
-
-  function nextSlide() {
-    currentSlide++;
-    showSlide(currentSlide);
-  }
-
-  function prevSlide() {
-    currentSlide--;
-    showSlide(currentSlide);
-  }
-
-  function autoNextSlide() {
-    nextSlide();
-  }
-
-  function goToSlide(n) {
-    currentSlide = n;
-    showSlide(currentSlide);
-  }
-
-  function scrollToContent() {
-    document.getElementById('top').scrollIntoView({ behavior: 'smooth' });
-  }
-
-  // Initialiser à l'arrivée du DOM
-  document.addEventListener('DOMContentLoaded', initGallery);
-</script>
 
 </body>
 </html>
