@@ -4,26 +4,98 @@
   <meta charset="UTF-8">
   <title>Ma Loutre d'amour ❤️ El Bogossito</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --rose-pale: #ffe4ec;
-      --rose: #f48fb1;
-      --rouge: #c2185b;
-      --ivoire: #fff8f0;
-      --texte: #3a3a3a;
+      --bg-gradient: linear-gradient(135deg, #FFF0F5 0%, #FFE4E1 50%, #FFC0CB 100%);
+      --card-bg: rgba(255, 255, 255, 0.6);
+      --card-border: rgba(255, 255, 255, 0.8);
+      --text-main: #4A154B;
+      --text-muted: #7A3E5D;
+      --accent: #E0115F; /* Ruby red */
+      --accent-hover: #C2185B;
     }
 
     * {
       box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
     body {
-      margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top, var(--rose-pale), var(--ivoire));
-      color: var(--texte);
+      font-family: 'Outfit', sans-serif;
+      background: var(--bg-gradient);
+      color: var(--text-main);
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh;
     }
 
+    /* Floating background hearts */
+    .bg-hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    
+    .bg-hearts span {
+      position: absolute;
+      display: block;
+      width: 20px;
+      height: 20px;
+      background: rgba(255, 192, 203, 0.5);
+      animation: floatUp 15s linear infinite;
+      bottom: -150px;
+      border-radius: 50%;
+      box-shadow: 0 0 20px rgba(255, 192, 203, 0.5);
+    }
+
+    .bg-hearts span::before,
+    .bg-hearts span::after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: inherit;
+      border-radius: 50%;
+    }
+    .bg-hearts span::before { top: -10px; left: 0; }
+    .bg-hearts span::after { top: 0; left: 10px; }
+
+    .bg-hearts span:nth-child(1) { left: 10%; width: 40px; height: 40px; animation-duration: 10s; animation-delay: 0s; }
+    .bg-hearts span:nth-child(2) { left: 30%; width: 20px; height: 20px; animation-duration: 12s; animation-delay: 2s; }
+    .bg-hearts span:nth-child(3) { left: 50%; width: 30px; height: 30px; animation-duration: 15s; animation-delay: 4s; }
+    .bg-hearts span:nth-child(4) { left: 70%; width: 50px; height: 50px; animation-duration: 11s; animation-delay: 1s; }
+    .bg-hearts span:nth-child(5) { left: 90%; width: 25px; height: 25px; animation-duration: 14s; animation-delay: 3s; }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(1) rotate(0deg); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(-1000px) scale(0.5) rotate(360deg); opacity: 0; }
+    }
+
+    h1, h2, h3 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* Header */
     header {
       min-height: 100vh;
       display: flex;
@@ -31,357 +103,423 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 2rem 1.5rem;
-      position: relative;
-      overflow: hidden;
+      padding: 4rem 1rem;
+      animation: fadeIn 1.5s ease-out;
     }
 
-    header::before,
-    header::after {
-      content: "❤";
-      position: absolute;
-      font-size: 5rem;
-      color: rgba(244, 143, 177, 0.25);
-      animation: float 10s ease-in-out infinite alternate;
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    header::before {
-      top: 10%;
-      left: 5%;
-    }
-
-    header::after {
-      bottom: 5%;
-      right: 8%;
-      animation-delay: 3s;
-    }
-
-    @keyframes float {
-      from { transform: translateY(0); }
-      to   { transform: translateY(-30px); }
-    }
-
-    .tag {
+    .pill {
       display: inline-block;
-      padding: 0.35rem 0.9rem;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.75);
-      color: var(--rouge);
-      font-size: 0.85rem;
+      padding: 0.5rem 1.2rem;
+      border-radius: 50px;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--card-border);
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
       text-transform: uppercase;
-      letter-spacing: 0.12em;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 15px rgba(224, 17, 95, 0.1);
+    }
+
+    header h1 {
+      font-size: clamp(3rem, 8vw, 5rem);
+      color: var(--accent);
       margin-bottom: 1.5rem;
+      line-height: 1.1;
+      text-shadow: 2px 2px 10px rgba(224, 17, 95, 0.1);
     }
 
-    h1 {
-      font-size: clamp(2.3rem, 5vw, 3rem);
-      margin: 0 0 0.7rem;
-      color: var(--rouge);
+    header p {
+      font-size: 1.25rem;
+      max-width: 700px;
+      margin: 0 auto 3rem;
+      color: var(--text-muted);
+      font-weight: 300;
     }
 
-    h1 span {
-      white-space: nowrap;
-    }
-
-    .subtitle {
-      font-size: 1.05rem;
-      max-width: 28rem;
-      margin: 0 auto 2rem;
-      line-height: 1.6;
-    }
-
-    .cta {
+    .btn {
       display: inline-flex;
       align-items: center;
-      gap: 0.6rem;
-      padding: 0.9rem 1.6rem;
-      border-radius: 999px;
-      border: none;
-      background: linear-gradient(135deg, var(--rouge), var(--rose));
+      gap: 0.8rem;
+      padding: 1rem 2.5rem;
+      border-radius: 50px;
+      background: linear-gradient(45deg, var(--accent), #FF6B81);
       color: white;
-      font-size: 0.95rem;
-      cursor: pointer;
+      font-size: 1.1rem;
+      font-weight: 600;
       text-decoration: none;
-      box-shadow: 0 14px 30px rgba(194, 24, 91, 0.35);
-      transition: transform 0.18s ease, box-shadow 0.18s ease;
+      box-shadow: 0 10px 25px rgba(224, 17, 95, 0.4);
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
     }
 
-    .cta:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 18px 40px rgba(194, 24, 91, 0.45);
+    .btn:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(224, 17, 95, 0.5);
+    }
+    
+    .btn .heart-icon {
+      animation: pulse 1.5s infinite;
     }
 
-    .cta span.heart {
-      animation: heartbeat 1.2s ease-in-out infinite;
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
     }
 
-    @keyframes heartbeat {
-      0%, 100% { transform: scale(1); }
-      25%      { transform: scale(1.15); }
-      50%      { transform: scale(0.96); }
-      75%      { transform: scale(1.08); }
-    }
-
-    main {
-      max-width: 960px;
-      margin: 0 auto 3rem;
-      padding: 0 1.5rem 3rem;
-    }
-
+    /* Sections */
     section {
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 22px;
-      padding: 1.8rem 1.6rem;
-      margin-top: 1.8rem;
-      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.7);
-      backdrop-filter: blur(12px);
+      padding: 6rem 0;
     }
 
-    section h2 {
-      margin-top: 0;
-      font-size: 1.3rem;
-      color: var(--rouge);
+    .glass-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--card-border);
+      border-radius: 30px;
+      padding: 3rem;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+      margin-bottom: 4rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .glass-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 25px 50px rgba(224, 17, 95, 0.1);
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      color: var(--accent);
+      margin-bottom: 2rem;
+      text-align: center;
       display: flex;
       align-items: center;
-      gap: 0.6rem;
+      justify-content: center;
+      gap: 1rem;
     }
 
-    section h2 span.icon {
-      font-size: 1.4rem;
-    }
-
-    .grid {
+    /* Grid Layouts */
+    .bento-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 1.1rem;
-      margin-top: 1.1rem;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
     }
 
-    .card {
-      padding: 1rem 0.9rem;
-      border-radius: 18px;
-      background: linear-gradient(135deg, rgba(244, 143, 177, 0.08), rgba(255, 255, 255, 0.95));
+    .bento-item {
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 24px;
+      padding: 2rem;
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
     }
 
-    .card h3 {
-      margin: 0 0 0.35rem;
-      font-size: 1rem;
-      color: var(--rouge);
+    .bento-item:hover {
+      background: rgba(255, 255, 255, 0.8);
+      transform: translateY(-5px);
     }
 
-    .card p {
-      margin: 0;
-      font-size: 0.92rem;
-      line-height: 1.6;
+    .bento-item h3 {
+      font-size: 1.5rem;
+      color: var(--accent);
+      margin-bottom: 1rem;
     }
 
-    .quote {
-      font-style: italic;
-      font-size: 0.98rem;
-      line-height: 1.7;
-      border-left: 3px solid var(--rose);
-      padding-left: 1rem;
-      margin-top: 1rem;
-    }
-
+    /* Timeline */
     .timeline {
       position: relative;
-      padding-left: 1.2rem;
-      margin-top: 0.9rem;
+      max-width: 800px;
+      margin: 0 auto;
     }
 
     .timeline::before {
-      content: "";
+      content: '';
       position: absolute;
-      top: 0.2rem;
-      left: 0.35rem;
-      bottom: 0.2rem;
-      width: 2px;
-      background: linear-gradient(to bottom, var(--rose), transparent);
-      border-radius: 999px;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(to bottom, var(--accent), transparent);
+      border-radius: 4px;
     }
 
     .timeline-item {
       position: relative;
-      margin-bottom: 0.85rem;
-      padding-left: 1.1rem;
-      font-size: 0.94rem;
+      margin-bottom: 3rem;
+      width: 50%;
+      padding-right: 3rem;
     }
 
-    .timeline-item::before {
-      content: "";
+    .timeline-item:nth-child(even) {
+      margin-left: 50%;
+      padding-right: 0;
+      padding-left: 3rem;
+    }
+
+    .timeline-dot {
       position: absolute;
-      width: 10px;
-      height: 10px;
-      border-radius: 999px;
-      background: var(--rouge);
-      left: -0.1rem;
-      top: 0.35rem;
-      box-shadow: 0 0 0 4px rgba(244, 143, 177, 0.25);
+      right: -10px;
+      top: 0;
+      width: 20px;
+      height: 20px;
+      background: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 0 5px rgba(224, 17, 95, 0.2);
     }
 
-    .timeline-item span.date {
-      font-weight: 600;
-      color: var(--rouge);
-      margin-right: 0.4rem;
+    .timeline-item:nth-child(even) .timeline-dot {
+      left: -10px;
     }
 
-    .footer-note {
+    .timeline-date {
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+      display: block;
+      font-size: 1.2rem;
+    }
+
+    /* Gallery */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1.5rem;
+      padding: 1rem 0;
+    }
+
+    .gallery-item {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      aspect-ratio: 1;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      cursor: pointer;
+      background: #fff;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+      display: block;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.1);
+    }
+
+    .gallery-item::after {
+      content: '❤️';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(224, 17, 95, 0.6), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding-bottom: 20px;
+      font-size: 2rem;
+    }
+
+    .gallery-item:hover::after {
+      opacity: 1;
+    }
+
+    /* Footer */
+    footer {
       text-align: center;
-      font-size: 0.85rem;
-      color: rgba(0, 0, 0, 0.55);
-      margin-top: 1.8rem;
+      padding: 4rem 2rem;
+      color: var(--text-muted);
     }
 
-    .footer-note strong {
-      color: var(--rouge);
+    .signature {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-style: italic;
+      color: var(--accent);
+      margin-top: 2rem;
     }
 
-    @media (min-width: 720px) {
-      header {
-        padding-top: 3rem;
+    @media (max-width: 768px) {
+      .timeline::before {
+        left: 20px;
       }
-
-      .hero-layout {
-        display: grid;
-        grid-template-columns: 1.3fr 1fr;
-        gap: 3rem;
-        align-items: center;
-        max-width: 960px;
-        margin: 0 auto;
+      .timeline-item, .timeline-item:nth-child(even) {
+        width: 100%;
+        margin-left: 0;
+        padding-left: 50px;
+        padding-right: 0;
       }
-
-      .hero-card {
-        background: rgba(255, 255, 255, 0.9);
-        border-radius: 24px;
-        padding: 1.6rem 1.4rem;
-        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.06);
-        border: 1px solid rgba(255, 255, 255, 0.7);
-        backdrop-filter: blur(16px);
+      .timeline-dot, .timeline-item:nth-child(even) .timeline-dot {
+        left: 10px;
       }
-
-      .hero-card h3 {
-        margin-top: 0;
-        font-size: 1.05rem;
-        color: var(--rouge);
-      }
-
-      .hero-card p {
-        font-size: 0.92rem;
-        line-height: 1.6;
+      .glass-card {
+        padding: 2rem 1.5rem;
       }
     }
   </style>
 </head>
 <body>
 
-<header id="top">
-  <div class="hero-layout">
-    <div>
-      <div class="tag">Pour loutre des neiges • Saint-Valentin 2026</div>
-      <h1>
-        <span>Mon petit renne</span> ❤️ <span>Moi el bg </span>
-      </h1>
-      <p class="subtitle">
-        Ce petit site est mon moyen à moi, de développeur qui passe beaucoup trop de temps 
-        derrière son écran, pour te dire quelque chose de très simple&nbsp;: je t’aime, aujourd’hui encore plus qu’hier et ma vie je veux las passer avec toi depuis que tu es rentré dans ma vie mon monde à changer.
-      </p>
-      <a href="#histoire" class="cta">
-        <span class="heart">❤</span>
-        <span>Découvrir notre petite histoire</span>
-      </a>
-    </div>
-
-    <aside class="hero-card">
-      <h3>Pourquoi ce site&nbsp;?</h3>
-      <p>
-        On vie ensemble à Toulouse, les mêmes journées qui commencent tôt, et les soirées où je reste un peu trop longtemps à bidouiller des serveurs ou du code. 
-        Ce soir, tout ça est pour toi, pour nous, et pour tout ce que l’on construit ensemble.
-      </p>
-    </aside>
+  <div class="bg-hearts">
+    <span></span><span></span><span></span><span></span><span></span>
   </div>
-</header>
 
-<main>
-  <section id="histoire">
-    <h2><span class="icon">📖</span> Notre histoire en quelques lignes</h2>
-    <div class="timeline">
-      <div class="timeline-item">
-        <span class="date">Avant toi</span>
-        Je passais déjà mes journées dans le monde du code et des serveurs, mais il manquait la meilleure partie&nbsp;: quelqu’un avec qui vraiment partager la vie.
-      </div>
-      <div class="timeline-item">
-        <span class="date">Toi</span>
-        Tu es arrivée comme une évidence, petit à petit tu as pris toute la place, et notre appartement est devenu un vrai chez-nous.
-      </div>
-      <div class="timeline-item">
-        <span class="date">Aujourd’hui</span>
-        On se réveille tôt, on court après le temps entre le travail, la salle et le reste, mais au milieu de tout ça il y a toujours ce moment où je me dis que j’ai une chance immense de t’avoir.
-      </div>
-      <div class="timeline-item">
-        <span class="date">Demain</span>
-        Ce n’est pas un grand discours, juste une promesse simple&nbsp;: continuer à faire de mon mieux pour te rendre fière, te faire rire, et t’aimer fort, même dans les petits gestes du quotidien.
-      </div>
-    </div>
-    <p class="quote">
-      «&nbsp;Ce site, c’est un bout de moi, écrit en lignes de code, pour la personne qui rend toutes mes journées plus douces, même celles qui commencent à 5&nbsp;h du matin.&nbsp;»
-    </p>
-  </section>
+  <div class="container">
+    <header id="top">
+      <div class="pill">Pour loutre des neiges • Saint-Valentin 2026</div>
+      <h1>Mon petit renne ❤️ <br>Moi el bg</h1>
+      <p>
+        Ce petit site est mon moyen à moi, de développeur qui passe beaucoup trop de temps 
+        derrière son écran, pour te dire quelque chose de très simple : je t’aime, aujourd’hui encore plus qu’hier, et ma vie a changé depuis que tu y es entrée.
+      </p>
+      <a href="#histoire" class="btn">
+        <span class="heart-icon">❤️</span> Découvrir notre histoire
+      </a>
+    </header>
 
-  <section id="toi">
-    <h2><span class="icon">🌹</span> Ce que j’aime chez toi</h2>
-    <div class="grid">
-      <div class="card">
-        <h3>Ta présence</h3>
-        <p>
-          Le simple fait de savoir que tu m’attends à la maison quand tu es en tt , ou te voir au travail transforme une journée chargée en quelque chose de plus léger. 
-          Tu fais de notre appartement un endroit où j’ai envie de rentrer vite.
-        </p>
-      </div>
-      <div class="card">
-        <h3>Ton soutien</h3>
-        <p>
-          Tu acceptes mes soirées à faire du DevOps, mes projets un peu fous et mes idées de geek, 
-          tout en me ramenant toujours à l’essentiel&nbsp;: nous deux.
-        </p>
-      </div>
-      <div class="card">
-        <h3>Ton quotidien avec moi</h3>
-        <p>
-          J’aime nos routines, nos fous rires pour rien, nos séries regardées ensemble, nos petites bastons dans le lit,  
-          et toutes ces choses simples qui rendent notre vie ensemble unique.
-        </p>
-      </div>
-    </div>
-  </section>
+    <main>
+      <section id="histoire">
+        <div class="glass-card">
+          <h2 class="section-title">📖 Notre Histoire</h2>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <span class="timeline-date">Avant toi</span>
+              <p>Je passais déjà mes journées dans le monde du code et des serveurs, mais il manquait la meilleure partie : quelqu’un avec qui vraiment partager la vie.</p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <span class="timeline-date">Toi</span>
+              <p>Tu es arrivée comme une évidence, petit à petit tu as pris toute la place, et notre appartement est devenu un vrai chez-nous.</p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <span class="timeline-date">Aujourd’hui</span>
+              <p>On se réveille tôt, on court après le temps entre le travail, la salle et le reste, mais au milieu de tout ça, je me dis toujours que j’ai une chance immense de t’avoir.</p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <span class="timeline-date">Demain</span>
+              <p>Une promesse simple : continuer à faire de mon mieux pour te rendre fière, te faire rire, et t’aimer fort dans les petits gestes du quotidien.</p>
+            </div>
+          </div>
+        </div>
+      </section>
 
-  <section id="nous">
-    <h2><span class="icon">💌</span> Un mot pour toi</h2>
-    <p class="quote">
-      Mon bébé ,<br><br>
-      On ne vit pas une histoire parfaite de film, mais on vit quelque chose de bien plus vrai&nbsp;: notre histoire, avec nos tasses de café, 
-      nos journées bien remplies, les bugfix de dernière minute et les câlins qui effacent tout.<br><br>
-      Merci de partager ma vie, mes hauts, mes bas, et ce fichu ordinateur qui prend parfois trop de place. 
-      Je te promets de toujours trouver du temps pour toi, pour nous, et pour continuer à écrire notre histoire, 
-      ligne par ligne, jour après jour.<br><br>
-      Je t’aime.<br>
-      Mathéo a qui le beau gosse (autoproclamé) ❤️
-    </p>
-  </section>
+      <section id="toi">
+        <h2 class="section-title">🌹 Ce que j'aime chez toi</h2>
+        <div class="bento-grid">
+          <div class="bento-item">
+            <h3>Ta présence</h3>
+            <p>Le simple fait de savoir que tu m’attends à la maison quand tu es en télétravail, ou te voir au travail transforme une journée chargée en quelque chose de plus léger. Tu fais de notre appartement un endroit où j’ai envie de rentrer vite.</p>
+          </div>
+          <div class="bento-item">
+            <h3>Ton soutien</h3>
+            <p>Tu acceptes mes soirées à faire du DevOps, mes projets un peu fous et mes idées de geek, tout en me ramenant toujours à l’essentiel : nous deux.</p>
+          </div>
+          <div class="bento-item">
+            <h3>Ton quotidien avec moi</h3>
+            <p>J’aime nos routines, nos fous rires pour rien, nos séries regardées ensemble, nos petites bastons dans le lit, et toutes ces choses simples qui rendent notre vie ensemble unique.</p>
+          </div>
+        </div>
+      </section>
 
-  <section id="souvenir">
-    <h2><span class="icon">🎁</span> Un petit souvenir</h2>
-    <p>
-      Tu pourras garder ce site comme une carte de Saint-Valentin différente, 
-      un peu à notre image&nbsp;: simple, sincère et remplie de petits détails pensés pour toi. 
-      Et si un jour notre vie change d’adresse ou de ville, je mettrai cette page à jour, comme on met à jour un projet important.
-    </p>
-    <div class="footer-note">
-      Fait avec beaucoup d’amour, un peu de code, et toi en tête du début à la fin. <strong>Bonne Saint-Valentin, mon amour de ma vie.</strong>
-    </div>
-  </section>
-</main>
+      <section id="galerie">
+        <div class="glass-card">
+          <h2 class="section-title">📸 Nos Souvenirs</h2>
+          <p style="text-align: center; margin-bottom: 2rem; color: var(--text-muted);">Des petits morceaux de notre bonheur au quotidien, capturés pour toujours.</p>
+          <div class="gallery-grid">
+            <div class="gallery-item"><img src="images/WhatsApp%20Image%202026-02-14%20at%209.48.49%20AM.jpeg" alt="Souvenir 1" loading="lazy"></div>
+            <div class="gallery-item"><img src="images/WhatsApp%20Image%202026-02-14%20at%209.48.50%20AM%20(1).jpeg" alt="Souvenir 2" loading="lazy"></div>
+            <div class="gallery-item"><img src="images/WhatsApp%20Image%202026-02-14%20at%209.48.50%20AM%20(2).jpeg" alt="Souvenir 3" loading="lazy"></div>
+            <div class="gallery-item"><img src="images/WhatsApp%20Image%202026-02-14%20at%209.48.50%20AM%20(3).jpeg" alt="Souvenir 4" loading="lazy"></div>
+            <div class="gallery-item"><img src="images/WhatsApp%20Image%202026-02-14%20at%209.48.50%20AM%20(4).jpeg" alt="Souvenir 5" loading="lazy"></div>
+            <div class="gallery-item"><img src="images/WhatsApp%20Image%202026-02-14%20at%209.48.50%20AM%20(5).jpeg" alt="Souvenir 6" loading="lazy"></div>
+            <div class="gallery-item"><img src="images/WhatsApp%20Image%202026-02-14%20at%209.48.50%20AM.jpeg" alt="Souvenir 7" loading="lazy"></div>
+            <div class="gallery-item"><img src="images/WhatsApp%20Image%202026-02-14%20at%209.48.51%20AM.jpeg" alt="Souvenir 8" loading="lazy"></div>
+          </div>
+        </div>
+      </section>
 
+      <section id="nous">
+        <div class="glass-card" style="text-align: center; background: linear-gradient(135deg, rgba(255,255,255,0.8), rgba(255,228,225,0.9));">
+          <h2 class="section-title">💌 Un mot pour toi</h2>
+          <p style="font-size: 1.15rem; max-width: 700px; margin: 0 auto; line-height: 1.8;">
+            Mon bébé,<br><br>
+            On ne vit pas une histoire parfaite de film, mais on vit quelque chose de bien plus vrai : notre histoire, avec nos tasses de café, 
+            nos journées bien remplies, les bugfix de dernière minute et les câlins qui effacent tout.<br><br>
+            Merci de partager ma vie, mes hauts, mes bas, et ce fichu ordinateur qui prend parfois trop de place. 
+            Je te promets de toujours trouver du temps pour toi, pour nous, et pour continuer à écrire notre histoire, 
+            ligne par ligne, jour après jour.
+          </p>
+          <div class="signature">
+            Je t’aime.<br>
+            Mathéo a qui le beau gosse (autoproclamé) ❤️
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer>
+      <p>Fait avec beaucoup d’amour, un peu de code, et toi en tête du début à la fin.</p>
+      <p><strong>Bonne Saint-Valentin, mon amour de ma vie.</strong></p>
+    </footer>
+  </div>
+
+  <script>
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+
+    // Simple scroll animation for bento items, gallery and timeline
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = 1;
+          entry.target.style.transform = 'translateY(0)';
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.bento-item, .gallery-item, .timeline-item').forEach(item => {
+      item.style.opacity = 0;
+      item.style.transform = 'translateY(20px)';
+      item.style.transition = 'all 0.6s ease-out';
+      observer.observe(item);
+    });
+  </script>
 </body>
 </html>
