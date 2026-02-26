@@ -355,6 +355,44 @@
       margin-top: 2rem;
     }
 
+    .music-player {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid var(--card-border);
+      border-radius: 50px;
+      padding: 0.75rem 1.25rem;
+      box-shadow: 0 10px 20px rgba(224, 17, 95, 0.15);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .music-player:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 25px rgba(224, 17, 95, 0.25);
+    }
+
+    .music-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .music-icon {
+      font-size: 1.2rem;
+    }
+
+    .music-text {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.5px;
+    }
+
     @media (max-width: 768px) {
       .timeline::before {
         left: 20px;
@@ -483,7 +521,29 @@
     </footer>
   </div>
 
+  <div class="music-player" id="music-player" onclick="togglePlay()">
+    <div class="music-btn">
+      <span class="music-icon" id="music-icon">▶️</span>
+      <span class="music-text">Manu Chao - Me Gustas Tu</span>
+    </div>
+    <iframe id="youtube-player" src="https://www.youtube.com/embed/rs6Y4kZ8qtw?enablejsapi=1&autoplay=0" style="display: none;" allow="autoplay"></iframe>
+  </div>
+
   <script>
+    let isPlaying = false;
+    function togglePlay() {
+      const iframe = document.getElementById('youtube-player');
+      const icon = document.getElementById('music-icon');
+      if (isPlaying) {
+        iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+        icon.innerHTML = '▶️';
+      } else {
+        iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+        icon.innerHTML = '⏸️';
+      }
+      isPlaying = !isPlaying;
+    }
+
     // Smooth scrolling for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
